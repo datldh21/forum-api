@@ -15,10 +15,7 @@ var dataSchema = new Schema({
     content: {
         type: String,
     },
-    upvotes: {
-        type: Number,
-    },
-    downvotes: {
+    votes: {
         type: Number,
     },
     date: {
