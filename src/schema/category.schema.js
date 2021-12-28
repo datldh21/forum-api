@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-var collectionName = 'categories';
+var collectionName = 'category';
 
 var dataSchema = new mongoose.Schema({
     name: {
@@ -20,4 +20,4 @@ var dataSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('categories', dataSchema, collectionName);
+module.exports = mongoose.model('category', dataSchema, collectionName);
