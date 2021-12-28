@@ -7,9 +7,9 @@ const router = express.Router();
 const { uri } = require("./src/utils/uri");
 const mongoose = require("mongoose");
 const user = require("./src/routes/user.router");
-const point = require("./src/routes/point.router");
-const item = require("./src/routes/item.router");
-const comment = require("./src/routes/comment.router");
+const post = require("./src/routes/post.router");
+const topic = require("./src/routes/topic.router");
+const category = require("./src/routes/category.router");
 
 mongoose
     .connect(uri, {
@@ -33,8 +33,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/user", user);
-app.use("/point", point);
-app.use("/item", item);
-app.use("/comment", comment);
+app.use("/post", post);
+app.use("/topic", topic);
+app.use("/category", category);
 
 module.exports = app;

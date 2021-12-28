@@ -6,10 +6,7 @@ const Schema = mongoose.Schema;
 var dataSchema = new Schema({
     categoryId: {
         type: Schema.Types.ObjectId,
-        ref: "categories",
-    },
-    icon: {
-        type: String
+        ref: "category",
     },
     name: {
         type: String
