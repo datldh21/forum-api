@@ -8,6 +8,7 @@ const Post = function (post) {
     this.content = post.content;
     this.votes = post.votes;
     this.date = post.date;
+    this.seen = post.seen;
 }
 
 Post.create = async (newPost, result) => {

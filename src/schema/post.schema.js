@@ -18,6 +18,9 @@ var dataSchema = new Schema({
     votes: {
         type: Number,
     },
+    seen: {
+        type: Boolean,
+    },
     date: {
         type: Date,
     }
