@@ -3,6 +3,7 @@ var router = express.Router();
 const post = require('../controllers/post.controller');
 
 router.post("/", post.create);
+router.get("/", post.getAllPosts);
 router.get("/:id", post.getOnePost);
 router.get("/topic/:id", post.getTopicPost);
 router.get("/user/:id", post.getUserPost);
