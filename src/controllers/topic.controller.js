@@ -20,6 +20,18 @@ exports.create = async (req, res) => {
     }
 }
 
+exports.getRecentTopic = async (req, res) => {
+    Topic.getRecentTopic((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred!"
+            })
+        } else {
+            res.send(data);
+        }
+    });
+}
+
 exports.getOneTopic = async (req, res) => {
     const id = req.params.id;
     if (!id || id.length < 24) {
