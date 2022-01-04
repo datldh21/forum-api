@@ -53,6 +53,34 @@ Topic.getRecentTopic = async (result) => {
     response(queryTopic, result);
 }
 
+Topic.getPopularTopic = async (result) => {
+    const agg = [
+        {
+            $sort: {
+                viewCount: -1,
+            }
+        },
+        {
+            $lookup: {
+                from: "category",
+                localField: "categoryId",
+                foreignField: "_id",
+                as: "category"
+            }
+        },
+        {
+            $lookup: {
+                from: "user",
+                localField: "userCreate",
+                foreignField: "_id",
+                as: "user"
+            }
+        }
+    ];
+    const queryTopic = await topicSchema.aggregate(agg);
+    response(queryTopic, result);
+}
+
 Topic.getOneTopic = async (id, result) => {
     const agg = [
         {
