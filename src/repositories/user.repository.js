@@ -69,8 +69,8 @@ User.getInfoTotal = async (result) => {
     const agg =[
         {
             $project: {
-                firstName: 1,
-                lastName: 1,
+                userName: 1,
+                fullName: 1,
                 gender: 1,
                 startDate: 1,
                 avatar: 1,
