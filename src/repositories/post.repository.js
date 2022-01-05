@@ -3,11 +3,13 @@ const postSchema = require("../schema/post.schema");
 const { response } = require("../utils/response");
 
 const Post = function (post) {
+    this.categoryId = post.categoryId;
     this.topicId = post.topicId;
     this.userId = post.userId;
     this.content = post.content;
     this.votes = post.votes;
     this.date = post.date;
+    this.seen = post.seen;
 }
 
 Post.create = async (newPost, result) => {
@@ -22,6 +24,21 @@ Post.create = async (newPost, result) => {
     const queryPost = await post.save();
     response(queryPost, result);
 };
+
+Post.getAllPosts = async (result) => {
+    const agg = [
+        {
+            $lookup: {
+                from: "user",
+                localField: "userId",
+                foreignField: "_id",
+                as: "user",
+            }
+        }
+    ]
+    const queryPost = await postSchema.aggregate(agg);
+    response(queryPost, result);
+}
 
 Post.getOnePost = async (id, result) => {
     const agg = [

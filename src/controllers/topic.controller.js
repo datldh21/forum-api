@@ -14,10 +14,34 @@ exports.create = async (req, res) => {
                     message: "Some error occurred!"
                 })
             } else {
-                res.send(data);
+                res.send({ response: data, success: true, errorCode: 0 });
             }
         });
     }
+}
+
+exports.getRecentTopic = async (req, res) => {
+    Topic.getRecentTopic((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred!"
+            })
+        } else {
+            res.send(data);
+        }
+    })
+}
+
+exports.getPopularTopic = async (req, res) => {
+    Topic.getPopularTopic((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred!"
+            })
+        } else {
+            res.send(data);
+        }
+    })
 }
 
 exports.getOneTopic = async (req, res) => {
