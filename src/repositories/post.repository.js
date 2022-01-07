@@ -104,6 +104,11 @@ Post.getUserPost = async (id, result) => {
             }
         },
         {
+            $sort: {
+                date: -1,
+            }
+        },
+        {
             $lookup: {
                 from: "topic",
                 localField: "topicId",
