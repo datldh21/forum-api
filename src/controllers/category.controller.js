@@ -51,6 +51,27 @@ exports.getAllCategory = async (req, res) => {
     });
 }
 
+exports.updateTopicCount = async (req, res) => {
+    const id = req.params.id;
+    const dataUpdate = req.body;
+
+    if (!id || !dataUpdate) {
+        res.status(400).send({
+            message: "Content can not be empty!",
+        });
+    } else {
+        Category.updateTopicCount(id, dataUpdate, (err, data) => {
+            if (err) {
+                res.status(500).send({
+                    message: "Some error occurred!"
+                });
+            } else {
+                res.send(data);
+            }
+        });
+    }
+}
+
 exports.update = async (req, res) => {
     const id = req.params.id;
     const dataUpdate = req.body;

@@ -5,6 +5,7 @@ const category = require("../controllers/category.controller");
 router.post("/", category.create);
 router.get("/:id", category.getOneCategory);
 router.get("/", category.getAllCategory);
+router.patch("/topicCount/:id", category.updateTopicCount);
 router.patch("/:id", category.update);
 router.delete("/:id", category.delete);
 

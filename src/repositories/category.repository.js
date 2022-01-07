@@ -28,6 +28,12 @@ Category.getAllCategory = async (result) => {
     response(query, result);
 }
 
+Category.updateTopicCount = async (id, result) => {
+    const filter = { _id: new ObjectId(id) };
+    const query = await categorySchema.updateOne(filter, {$inc: {topicCount: 1}});
+    return (null, { response: query });
+}
+
 Category.update = async (id, categoryUpdate, result) => {
     const filter = { _id: new ObjectId(id) };
     const query = await categorySchema.updateOne(filter, {$set: categoryUpdate}, {multi: true});
