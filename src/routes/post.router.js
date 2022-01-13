@@ -7,6 +7,8 @@ router.get("/", post.getAllPosts);
 router.get("/:id", post.getOnePost);
 router.get("/topic/:id", post.getTopicPost);
 router.get("/user/:id", post.getUserPost);
+router.patch("/votes/inc/:id", post.increaseVotes);
+router.patch("/votes/dec/:id", post.decreaseVotes);
 router.patch("/:id", post.update);
 router.delete("/:id", post.delete);
 

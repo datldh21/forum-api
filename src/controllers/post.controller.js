@@ -89,6 +89,46 @@ exports.getUserPost = async (req, res) => {
     }
 }
 
+exports.increaseVotes = async (req, res) => {
+    const id = req.params.id;
+    
+    if (!id) {
+        res.status(400).send({
+            message: "Content can not be empty!",
+        });
+    } else {
+        Post.increaseVotes(id,  (err, data) => {
+            if (err) {
+                res.status(500).send({
+                    message: "Some error occurred!"
+                });
+            } else {
+                res.status(200).send(data);
+            }
+        });
+    }
+}
+
+exports.decreaseVotes = async (req, res) => {
+    const id = req.params.id;
+    
+    if (!id) {
+        res.status(400).send({
+            message: "Content can not be empty!",
+        });
+    } else {
+        Post.decreaseVotes(id,  (err, data) => {
+            if (err) {
+                res.status(500).send({
+                    message: "Some error occurred!"
+                });
+            } else {
+                res.status(200).send(data);
+            }
+        });
+    }
+}
+
 exports.update = async (req, res) => {
     const id = req.params.id;
     const dataUpdate = req.body;
@@ -124,7 +164,7 @@ exports.delete = async (req, res) => {
                 });
             else {
                 res.send(data);
-            }
+            };
         });
-    }
-}
+    };
+};

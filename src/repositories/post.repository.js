@@ -9,7 +9,6 @@ const Post = function (post) {
     this.content = post.content;
     this.votes = post.votes;
     this.date = post.date;
-    this.seen = post.seen;
 }
 
 Post.create = async (newPost, result) => {
@@ -129,32 +128,40 @@ Post.getUserPost = async (id, result) => {
     response(queryPost, result);
 };
 
+Post.increaseVotes = async (id, result) => {
+    const filter = { _id: new ObjectId(id) };
+    const query = await postSchema.updateOne(filter, {$inc: {votes: 1}});
+    result (null, { response: query });
+}
+
+Post.decreaseVotes = async (id, result) => {
+    const filter = { _id: new ObjectId(id) };
+    const query = await postSchema.updateOne(filter, {$inc: {votes: -1}});
+    result (null, { response: query });
+}
+
 Post.update = async (postId, postUpdate, result) => {
     const filter = { _id: new ObjectId(postId) };
     const queryPost = await postSchema.updateOne(filter, { $set: postUpdate }, { multi: true });
-    return (null, {
+    result (null, {
         response: queryPost,
     });
 };
 
 Post.delete = async (id, result) => {
-    const queryPost = await postSchema.deleteOne({ _id: new ObjectId(id) });
-    if (queryPost.deletedCount == 0) {
-        return result(
-            {
-                response: `no post with id = ${id}`,
-                success: false,
-                errorCode: 1,
-            }, null
-        );
+    const query = await postSchema.deleteOne({ _id: new ObjectId(id) });
+    if (query.deletedCount == 0) {
+        return result({
+            response: `no point with id = ${id}`,
+            success: false,
+            errorCode: 1
+        }, null);
     }
-    return result(
-        {
-            response: queryPost,
-            success: true,
-            errorCode: 0
-        }
-    );
+    return result(null, {
+        response: query,
+        success: true,
+        errorCode: 0
+    });
 };
 
 module.exports = Post;
