@@ -137,6 +137,36 @@ Topic.getCategoryTopic = async (id, result) => {
     response(queryTopic, result);
 }
 
+Topic.updateViewCount = async (id, result) => {
+    const filter = { _id: new ObjectId(id) };
+    const query = await topicSchema.updateOne(filter, {$inc: {viewCount: 1}});
+    result (null, { response: query });
+}
+
+Topic.increasePostCount = async (id, result) => {
+    const filter = { _id: new ObjectId(id) };
+    const query = await topicSchema.updateOne(filter, {$inc: {postCount: 1}});
+    result (null, { response: query });
+}
+
+Topic.decreasePostCount = async (id, result) => {
+    const filter = { _id: new ObjectId(id) };
+    const query = await topicSchema.updateOne(filter, {$inc: {postCount: -1}});
+    result (null, { response: query });
+}
+
+Topic.increaseVotes = async (id, result) => {
+    const filter = { _id: new ObjectId(id) };
+    const query = await topicSchema.updateOne(filter, {$inc: {voteCount: 1}});
+    result (null, { response: query });
+}
+
+Topic.decreaseVotes = async (id, result) => {
+    const filter = { _id: new ObjectId(id) };
+    const query = await topicSchema.updateOne(filter, {$inc: {voteCount: -1}});
+    result (null, { response: query });
+}
+
 Topic.update = async (topicId, topicUpdate, result) => {
     const filter = { _id: new ObjectId(topicId) };
     const queryTopic = await topicSchema.updateOne(filter, { $set: topicUpdate }, { multi: true} );

@@ -82,6 +82,106 @@ exports.getCategoryTopic = async (req, res) => {
     }
 }
 
+exports.updateViewCount = async (req, res) => {
+    const id = req.params.id;
+    
+    if (!id) {
+        res.status(400).send({
+            message: "Content can not be empty!",
+        });
+    } else {
+        Topic.updateViewCount(id, (err, data) => {
+            if (err) {
+                res.status(500).send({
+                    message: "Some error occurred!"
+                });
+            } else {
+                res.status(200).send(data);
+            }
+        });
+    }
+}
+
+exports.increasePostCount = async (req, res) => {
+    const id = req.params.id;
+    
+    if (!id) {
+        res.status(400).send({
+            message: "Content can not be empty!",
+        });
+    } else {
+        Topic.increasePostCount(id, (err, data) => {
+            if (err) {
+                res.status(500).send({
+                    message: "Some error occurred!"
+                });
+            } else {
+                res.status(200).send(data);
+            }
+        });
+    }
+}
+
+exports.decreasePostCount = async (req, res) => {
+    const id = req.params.id;
+    
+    if (!id) {
+        res.status(400).send({
+            message: "Content can not be empty!",
+        });
+    } else {
+        Topic.decreasePostCount(id, (err, data) => {
+            if (err) {
+                res.status(500).send({
+                    message: "Some error occurred!"
+                });
+            } else {
+                res.status(200).send(data);
+            }
+        });
+    }
+}
+
+exports.increaseVotes = async (req, res) => {
+    const id = req.params.id;
+    
+    if (!id) {
+        res.status(400).send({
+            message: "Content can not be empty!",
+        });
+    } else {
+        Topic.increaseVotes(id, (err, data) => {
+            if (err) {
+                res.status(500).send({
+                    message: "Some error occurred!"
+                });
+            } else {
+                res.status(200).send(data);
+            }
+        });
+    }
+}
+
+exports.decreaseVotes = async (req, res) => {
+    const id = req.params.id;
+    
+    if (!id) {
+        res.status(400).send({
+            message: "Content can not be empty!",
+        });
+    } else {
+        Topic.decreaseVotes(id, (err, data) => {
+            if (err) {
+                res.status(500).send({
+                    message: "Some error occurred!"
+                });
+            } else {
+                res.status(200).send(data);
+            }
+        });
+    }
+}
+
 exports.update = async (req, res) => {
     const id = req.params.id;
     const dataUpdate = req.body;

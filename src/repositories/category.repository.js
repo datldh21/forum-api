@@ -31,7 +31,19 @@ Category.getAllCategory = async (result) => {
 Category.updateTopicCount = async (id, result) => {
     const filter = { _id: new ObjectId(id) };
     const query = await categorySchema.updateOne(filter, {$inc: {topicCount: 1}});
-    return (null, { response: query });
+    result (null, { response: query });
+}
+
+Category.increasePostCount = async (id, result) => {
+    const filter = { _id: new ObjectId(id) };
+    const query = await categorySchema.updateOne(filter, {$inc: {postCount: 1}});
+    result (null, { response: query });
+}
+
+Category.decreasePostCount = async (id, result) => {
+    const filter = { _id: new ObjectId(id) };
+    const query = await categorySchema.updateOne(filter, {$inc: {postCount: -1}});
+    result (null, { response: query });
 }
 
 Category.update = async (id, categoryUpdate, result) => {
