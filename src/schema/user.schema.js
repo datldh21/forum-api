@@ -30,14 +30,14 @@ var dataSchema = new mongoose.Schema({
     role: {
         type: String,
     },
-    website: {
-        type: String,
-    },
     aboutMe: {
         type: String,
     }, 
-    signature: {
-        type: String,
+    notice: {
+        type: Boolean,
+    },
+    banned: {
+        type: Boolean,
     }
 });
 

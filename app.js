@@ -10,6 +10,7 @@ const user = require("./src/routes/user.router");
 const post = require("./src/routes/post.router");
 const topic = require("./src/routes/topic.router");
 const category = require("./src/routes/category.router");
+const notifications = require("./src/routes/notifications.router");
 
 mongoose
     .connect(uri, {
@@ -36,5 +37,6 @@ app.use("/user", user);
 app.use("/post", post);
 app.use("/topic", topic);
 app.use("/category", category);
+app.use("/notifications", notifications);
 
 module.exports = app;

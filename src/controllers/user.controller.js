@@ -59,17 +59,16 @@ exports.getInfoTotal = async (req, res) => {
     });
 };
 
-exports.updateInfo = async (req, res) => {
+exports.update = async (req, res) => {
     const id = req.params.id;
     if (!id || !req.body) {
         res.status(400).send({
             message: 'Content can not be empty!',
         });
     } else {
-        // const point = req.body.point;
         const user = req.body;
 
-        User.updateUser(id, user, (err, data) => {
+        User.update(id, user, (err, data) => {
             if (err)
                 res.status(500).send({
                     message: 'Some error occurred while update user.',
