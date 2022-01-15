@@ -5,6 +5,7 @@ const multer = require("multer");
 
 var upload = multer({ dest: "public/uploads" });
 router.post("/", user.login);
+router.post("/new", user.createUser);
 router.get("/info/:id", user.getInfo);
 router.get("/total", user.getInfoTotal);
 router.patch("/info/:id", user.update);

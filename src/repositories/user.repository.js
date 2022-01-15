@@ -90,6 +90,17 @@ User.update = async (id, dataUpdate, result) => {
     });
 };
 
-User.createUser = (user, result) => {};
+User.createUser = async (newUser, result) => {
+    let user = newUser;
+    if (!newUser.joinDate) {
+        user = {
+            ...user,
+            joinDate: new Date(),
+        };
+    };
+    user = new userSchema(user);
+    const query = await user.save();
+    response(query, result);
+};
 
 module.exports = User;
