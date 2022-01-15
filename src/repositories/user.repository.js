@@ -54,9 +54,9 @@ User.getInfo = async (id, result) => {
                 avatar: 1,
                 birthday: 1,
                 role: 1,
-                website: 1,
                 aboutMe: 1,
-                signature: 1,
+                notice: 1,
+                banned: 1,
             },
         }
     ];
@@ -82,32 +82,14 @@ User.getInfoTotal = async (result) => {
     result(null, queryfind);
 };
 
-User.updateUser = async (id, user, result) => {
+User.update = async (id, dataUpdate, result) => {
     const filter = { _id: new ObjectId(id) };
-
-    const queryUser = await userSchema.updateOne(filter, { $set: user });
-    if (queryUser.nModified != 1) {
-        return result(
-            {
-                response: `no success`,
-                success: false,
-                errorCode: 1,
-            },
-            null
-        );
-    }
-    return result(null, { response: queryUser, success: true, errorCode: 0 });
+    const query = await userSchema.updateOne(filter, { $set: dataUpdate }, { multi: true });
+    result (null, {
+        response: query,
+    });
 };
+
 User.createUser = (user, result) => {};
-
-User.saveCredit = async (result) => {
-    const query = await userSchema.updateMany({}, {$mul: {credit: 0.6}});
-    result(null, query);
-}
-
-User.resetMonthlyPoint = async (result) => {
-    const query = await userSchema.updateMany({}, {$mul: {point: 0}});
-    result(null, query);
-}
 
 module.exports = User;
